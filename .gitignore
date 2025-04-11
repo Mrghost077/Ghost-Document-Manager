@@ -1,0 +1,48 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.idea/
+
+# macOS files
+.DS_Store
+
+# Windows thumbnail cache
+Thumbs.db
+
+# Python distribution artifacts
+build/
+dist/
+*.egg-info/
+
+# Installer logs
+pip-log.txt
+
+# VS Code settings
+.vscode/
+
+# TkinterDnD2 logs or temp (if any)
+*.log
+
+# Executable files
+*.exe
+*.app
+*.dll
+
+# Python environment files
+*.pyd
+*.pyo
+
+# Coverage reports
+htmlcov/
+.coverage
+.tox/
+
+# PyInstaller folders
+__pyinstaller_cache__/
