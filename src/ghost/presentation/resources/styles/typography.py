@@ -1,0 +1,19 @@
+
+# Ghost 2.0 - Typography
+
+# Font family
+FONT_FAMILY = "Segoe UI"
+
+# Font sizes
+SIZE_SMALL = 12
+SIZE_BODY = 14
+SIZE_SECTION = 20
+SIZE_HEADING = 28
+
+# Font weights
+WEIGHT_NORMAL = 400
+WEIGHT_MEDIUM = 500
+WEIGHT_SEMIBOLD = 600
+WEIGHT_BOLD = 700
+
+SIZE_BRAND = 22

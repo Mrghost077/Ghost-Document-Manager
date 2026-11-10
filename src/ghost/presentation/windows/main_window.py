@@ -1,3 +1,4 @@
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QMainWindow,
     QWidget,
@@ -6,7 +7,12 @@ from PySide6.QtWidgets import (
     QPushButton,
     QLabel,
     QFrame,
+    QSizePolicy
 )
+
+from ghost.presentation.resources.styles import colors
+from ghost.presentation.resources.styles import typography
+from ghost.presentation.resources.styles import dimensions
 
 
 class MainWindow(QMainWindow):
@@ -22,39 +28,49 @@ class MainWindow(QMainWindow):
 
         # Main horizontal layout
         main_layout = QHBoxLayout(central_widget)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setSpacing(0)
 
         # Sidebar
         sidebar = QWidget()
-        sidebar.setStyleSheet("""
-            background-color: #172033;
+        sidebar.setStyleSheet(f"""
+           background-color: {colors.SIDEBAR_BACKGROUND};
         """)
         sidebar.setFixedWidth(220)
 
         sidebar_layout = QVBoxLayout(sidebar)
 
-        sidebar_layout.setSpacing(8)
-        sidebar_layout.setContentsMargins(24, 28, 24, 20)
+        sidebar_layout.setSpacing(dimensions.SPACE_SM)
+        sidebar_layout.setContentsMargins(
+            dimensions.SPACE_XL,
+            28,
+            dimensions.SPACE_XL,
+            dimensions.SPACE_LG
+        )
 
         # Branding container
         branding = QWidget()
         branding_layout = QVBoxLayout(branding)
 
-        branding_layout.setSpacing(5)
+        branding_layout.setSpacing(dimensions.SPACE_XS)
         branding_layout.setContentsMargins(0, 0, 0, 0)
 
         # Application title
         title = QLabel("GHOST")
-        title.setStyleSheet("""
-            color: white;
-            font-size: 22px;
-            font-weight: bold;
+        title.setStyleSheet(f"""
+            color: {colors.TEXT_PRIMARY};
+            font-family: "{typography.FONT_FAMILY}";
+            font-size: {typography.SIZE_BRAND}px;
+            font-weight: {typography.WEIGHT_BOLD};
         """)
 
         # Application subtitle
         subtitle = QLabel("Document Manager")
-        subtitle.setStyleSheet("""
-            color: #AAB6C8;
-            font-size: 12px;
+        subtitle.setStyleSheet(f"""
+            color: {colors.TEXT_SECONDARY};
+            font-family: "{typography.FONT_FAMILY}";
+            font-size: {typography.SIZE_SMALL}px;
+            font-weight: {typography.WEIGHT_NORMAL};
         """)
 
         branding_layout.addWidget(title)
@@ -128,8 +144,55 @@ class MainWindow(QMainWindow):
         image_button.setStyleSheet(button_style)
         settings_button.setStyleSheet(button_style)
 
-        # Workspace
+       # Workspace
         workspace = QWidget()
+
+        workspace_layout = QVBoxLayout(workspace)
+
+        workspace.setStyleSheet(f"""
+            background-color: {colors.APP_BACKGROUND};
+        """)
+
+        workspace_layout.setContentsMargins(
+            dimensions.SPACE_3XL,
+            dimensions.SPACE_3XL,
+            dimensions.SPACE_3XL,
+            dimensions.SPACE_2XL
+        )
+
+        workspace_layout.setSpacing(dimensions.SPACE_SM)
+        workspace_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+
+        # Workspace heading
+        heading = QLabel("Give your documents a little peace.")
+        heading.setObjectName("workspaceHeading")
+        heading.setStyleSheet(f"""
+            color: {colors.TEXT_PRIMARY};
+            font-family: "{typography.FONT_FAMILY}";
+            font-size: {typography.SIZE_HEADING}px;
+            font-weight: {typography.WEIGHT_SEMIBOLD};
+        """)
+        heading.setSizePolicy(
+            QSizePolicy.Policy.Preferred,
+            QSizePolicy.Policy.Fixed
+        )
+        description = QLabel(
+            "Simple tools to manage your documents, right on your desktop."
+        )
+        description.setStyleSheet(f"""
+            color: {colors.TEXT_SECONDARY};
+            font-family: "{typography.FONT_FAMILY}";
+            font-size: {typography.SIZE_BODY}px;
+            font-weight: {typography.WEIGHT_NORMAL};
+        """)
+        description.setSizePolicy(
+            QSizePolicy.Policy.Preferred,
+            QSizePolicy.Policy.Fixed
+        )
+
+        workspace_layout.addWidget(heading)
+        workspace_layout.addWidget(description)
+
 
         # Add both sections to the main layout
         main_layout.addWidget(sidebar)
