@@ -220,29 +220,32 @@ class MainWindow(QMainWindow):
         self.pdf_page = QWidget()
         self.page_stack.addWidget(self.pdf_page)
         pdf_button.clicked.connect(
-            lambda: self.page_stack.setCurrentWidget(self.pdf_page)
-        )
+                lambda: self.navigate_to(1)
+            )
 
         # Image Tools page
         self.image_page = QWidget()
         self.page_stack.addWidget(self.image_page)
         image_button.clicked.connect(
-            lambda: self.page_stack.setCurrentWidget(self.image_page)
+            lambda: self.navigate_to(2)
         )
 
         # Settings page
         self.settings_page = QWidget()
         self.page_stack.addWidget(self.settings_page)
         settings_button.clicked.connect(
-            lambda: self.page_stack.setCurrentWidget(self.settings_page)
+            lambda: self.navigate_to(3)
         )
 
         # Home Page Navigation
         home_button.clicked.connect(
-            lambda: self.page_stack.setCurrentWidget(workspace)
+            lambda: self.navigate_to(0)
         )
 
 
         # Add both sections to the main layout
         main_layout.addWidget(sidebar)
         main_layout.addWidget(self.page_stack)
+
+    def navigate_to(self, index):
+        self.page_stack.setCurrentIndex(index)
