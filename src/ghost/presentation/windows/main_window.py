@@ -16,6 +16,8 @@ from ghost.presentation.resources.styles import colors
 from ghost.presentation.resources.styles import typography
 from ghost.presentation.resources.styles import dimensions
 
+from ghost.presentation.pages.home_page import HomePage
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -166,55 +168,10 @@ class MainWindow(QMainWindow):
         # Page stack
         self.page_stack = QStackedWidget() 
 
-       # Workspace
-        workspace = QWidget()
+       # Home page
+        self.home_page = HomePage()
+        self.page_stack.addWidget(self.home_page)
 
-        workspace_layout = QVBoxLayout(workspace)
-
-        workspace.setStyleSheet(f"""
-            background-color: {colors.APP_BACKGROUND};
-        """)
-
-        workspace_layout.setContentsMargins(
-            dimensions.SPACE_3XL,
-            dimensions.SPACE_3XL,
-            dimensions.SPACE_3XL,
-            dimensions.SPACE_2XL
-        )
-
-        workspace_layout.setSpacing(dimensions.SPACE_SM)
-        workspace_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-
-        # Workspace heading
-        heading = QLabel("Give your documents a little peace.")
-        heading.setObjectName("workspaceHeading")
-        heading.setStyleSheet(f"""
-            color: {colors.TEXT_PRIMARY};
-            font-family: "{typography.FONT_FAMILY}";
-            font-size: {typography.SIZE_HEADING}px;
-            font-weight: {typography.WEIGHT_SEMIBOLD};
-        """)
-        heading.setSizePolicy(
-            QSizePolicy.Policy.Preferred,
-            QSizePolicy.Policy.Fixed
-        )
-        description = QLabel(
-            "Simple tools to manage your documents, right on your desktop."
-        )
-        description.setStyleSheet(f"""
-            color: {colors.TEXT_SECONDARY};
-            font-family: "{typography.FONT_FAMILY}";
-            font-size: {typography.SIZE_BODY}px;
-            font-weight: {typography.WEIGHT_NORMAL};
-        """)
-        description.setSizePolicy(
-            QSizePolicy.Policy.Preferred,
-            QSizePolicy.Policy.Fixed
-        )
-
-        workspace_layout.addWidget(heading)
-        workspace_layout.addWidget(description)
-        self.page_stack.addWidget(workspace)
 
         # PDF Tools page
         self.pdf_page = QWidget()
