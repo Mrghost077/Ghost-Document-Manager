@@ -58,3 +58,17 @@ class HomePage(QWidget):
         )
 
         layout.addWidget(description)
+
+        # Recently Used Tab
+        layout.addSpacing(dimensions.SPACE_3XL)
+
+        recent_tools_heading = QLabel("Recently Used")
+
+        recent_tools_heading.setStyleSheet(f"""
+            color: {colors.TEXT_PRIMARY};
+            font-family: "{typography.FONT_FAMILY}";
+            font-size: {typography.SIZE_SECTION}px;
+            font-weight: {typography.WEIGHT_SEMIBOLD};
+        """)
+
+        layout.addWidget(recent_tools_heading)
