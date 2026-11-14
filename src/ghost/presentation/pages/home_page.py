@@ -1,6 +1,16 @@
+from pathlib import Path
+
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QSizePolicy
+from PySide6.QtWidgets import (
+    QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QLabel,
+    QSizePolicy
+)
+
 from ghost.presentation.resources.styles import colors, dimensions, typography
+from ghost.presentation.widgets.tool_card import ToolCard
 
 
 class HomePage(QWidget):
@@ -72,3 +82,24 @@ class HomePage(QWidget):
         """)
 
         layout.addWidget(recent_tools_heading)
+
+        icon_path = (
+            Path(__file__).resolve().parents[1]
+            / "resources"
+            / "icons"
+            / "merge.svg"
+        )
+
+        merge_card = ToolCard(
+            "Merge PDFs",
+            "Combine multiple PDF files into one document.",
+            icon_path
+        )
+        merge_card.setMaximumWidth(360)
+        recent_tools_layout = QHBoxLayout()
+        recent_tools_layout.setSpacing(dimensions.SPACE_LG)
+
+        recent_tools_layout.addWidget(merge_card)
+        recent_tools_layout.addStretch()
+
+        layout.addLayout(recent_tools_layout)

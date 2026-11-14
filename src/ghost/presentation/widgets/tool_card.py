@@ -55,6 +55,9 @@ class ToolCard(QFrame):
         content_layout.setSpacing(14)
 
         icon_label = QLabel()
+        icon_label.setStyleSheet("""
+            background-color: transparent;
+        """)
         icon_label.setFixedSize(24, 24)
 
         icon_path = Path(icon_path)
@@ -67,6 +70,15 @@ class ToolCard(QFrame):
         )
 
         text_container = QWidget()
+
+        text_container.setStyleSheet("""
+            background-color: transparent;
+        """)
+
+        text_container.setAttribute(
+            Qt.WidgetAttribute.WA_TranslucentBackground,
+            True
+        )
 
         text_layout = QVBoxLayout(text_container)
         text_layout.setContentsMargins(0, 0, 0, 0)
@@ -84,6 +96,7 @@ class ToolCard(QFrame):
             font-family: "{typography.FONT_FAMILY}";
             font-size: {typography.SIZE_BODY}px;
             font-weight: {typography.WEIGHT_SEMIBOLD};
+            background-color: transparent;
         """)
 
         text_layout.addWidget(title_label)
@@ -95,6 +108,7 @@ class ToolCard(QFrame):
         )
         description_label.setStyleSheet(f"""
             color: {colors.TEXT_SECONDARY};
+            background-color: transparent;
             font-family: "{typography.FONT_FAMILY}";
             font-size: {typography.SIZE_SMALL}px;
             font-weight: {typography.WEIGHT_NORMAL};
