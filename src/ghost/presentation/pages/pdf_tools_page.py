@@ -6,7 +6,10 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QLabel,
     QSizePolicy,
-    QGridLayout
+    QGridLayout,
+    QHBoxLayout,
+    QPushButton,
+    QButtonGroup
 )
 
 from ghost.presentation.resources.styles import (
@@ -79,24 +82,102 @@ class PDFToolsPage(QWidget):
         layout.addWidget(description)
 
 
+        # Category filter buttons
+        filter_layout = QHBoxLayout()
+        filter_layout.setSpacing(10)
+
+        self.category_group = QButtonGroup(self)
+        self.category_group.setExclusive(True)
+
+        categories = ["All", "Organize", "Optimize", "Convert"]
+
+        for category in categories:
+
+            button = QPushButton(category)
+            button.setCheckable(True)
+
+            button.setStyleSheet("""
+                QPushButton {
+                    background-color: transparent;
+                    color: #A6B2C2;
+                    border: 1px solid #2B394B;
+                    border-radius: 14px;
+                    padding: 7px 16px;
+                    font-size: 13px;
+                }
+
+                QPushButton:hover {
+                    background-color: #243247;
+                    color: #F2F5F9;
+                }
+
+                QPushButton:checked {
+                    background-color: #C2C6CC;
+                    color: #111722;
+                    border: 1px solid #C2C6CC;
+                    font-weight: 600;
+                }
+            """)
+
+            self.category_group.addButton(button)
+            filter_layout.addWidget(button)
+
+            if category == "All":
+                button.setChecked(True)
+
+            button.clicked.connect(
+                lambda checked=False, selected=category:
+                    self.populate_tools(selected)
+            )
+
+        filter_layout.addStretch()
+
+        layout.addLayout(filter_layout)
+
+
         # Tool catalogue grid
-        tools_layout = QGridLayout()
+        self.tools_layout = QGridLayout()
 
-        tools_layout.setHorizontalSpacing(16)
-        tools_layout.setVerticalSpacing(16)
+        self.tools_layout.setHorizontalSpacing(16)
+        self.tools_layout.setVerticalSpacing(16)
 
-        icon_directory = (
-            Path(__file__).resolve().parent.parent
-            / "resources"
-            / "icons"
-        )
+        layout.addLayout(self.tools_layout)
 
-        for index, tool in enumerate(PDF_TOOLS):
+        self.icon_directory = (
+                    Path(__file__).resolve().parent.parent
+                    / "resources"
+                    / "icons"
+                )
+        
 
-            row = index // 3
-            column = index % 3
+        self.populate_tools()
 
-            icon_path = icon_directory / f"{tool['icon']}.svg"
+        
+    
+    def populate_tools(self, selected_category="All"):
+
+        while self.tools_layout.count():
+
+            item = self.tools_layout.takeAt(0)
+
+            widget = item.widget()
+
+            if widget:
+                widget.deleteLater()
+
+        # Create cards for the selected category
+        for tool in PDF_TOOLS:
+
+            if (
+                selected_category != "All"
+                and tool["category"] != selected_category
+            ):
+                continue
+
+            row = self.tools_layout.count() // 3
+            column = self.tools_layout.count() % 3
+
+            icon_path = self.icon_directory / f"{tool['icon']}.svg"
 
             card = ToolCard(
                 title=tool["title"],
@@ -104,7 +185,5 @@ class PDFToolsPage(QWidget):
                 icon_path=icon_path
             )
 
-            tools_layout.addWidget(card, row, column)
-
-        layout.addLayout(tools_layout)
+            self.tools_layout.addWidget(card, row, column)
 
