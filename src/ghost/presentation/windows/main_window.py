@@ -17,6 +17,7 @@ from ghost.presentation.resources.styles import typography
 from ghost.presentation.resources.styles import dimensions
 
 from ghost.presentation.pages.home_page import HomePage
+from ghost.presentation.pages.pdf_tools_page import PDFToolsPage
 
 
 class MainWindow(QMainWindow):
@@ -172,9 +173,8 @@ class MainWindow(QMainWindow):
         self.home_page = HomePage()
         self.page_stack.addWidget(self.home_page)
 
-
-        # PDF Tools page
-        self.pdf_page = QWidget()
+       # PDF Tools page
+        self.pdf_page = PDFToolsPage()
         self.page_stack.addWidget(self.pdf_page)
         pdf_button.clicked.connect(
                 lambda: self.navigate_to(1)

@@ -72,7 +72,7 @@ class HomePage(QWidget):
         # Recently Used Tab
         layout.addSpacing(dimensions.SPACE_3XL)
 
-        recent_tools_heading = QLabel("Recently Used")
+        recent_tools_heading = QLabel("Get Started")
 
         recent_tools_heading.setStyleSheet(f"""
             color: {colors.TEXT_PRIMARY};
@@ -83,6 +83,7 @@ class HomePage(QWidget):
 
         layout.addWidget(recent_tools_heading)
 
+       
         icon_path = (
             Path(__file__).resolve().parents[1]
             / "resources"
@@ -90,16 +91,32 @@ class HomePage(QWidget):
             / "merge.svg"
         )
 
-        merge_card = ToolCard(
+        recent_tools = [
+        (
             "Merge PDFs",
             "Combine multiple PDF files into one document.",
             icon_path
+        ),
+        (
+            "Split PDF",
+            "Separate a PDF into individual documents.",
+            icon_path
+        ),
+        (
+            "Compress PDF",
+            "Reduce the size of your PDF documents.",
+            icon_path
         )
-        merge_card.setMaximumWidth(360)
+    ]
         recent_tools_layout = QHBoxLayout()
         recent_tools_layout.setSpacing(dimensions.SPACE_LG)
 
-        recent_tools_layout.addWidget(merge_card)
+        for title, description, icon in recent_tools[:3]:
+            card = ToolCard(title, description, icon)
+            card.setMaximumWidth(360)
+
+            recent_tools_layout.addWidget(card)
+
         recent_tools_layout.addStretch()
 
         layout.addLayout(recent_tools_layout)
