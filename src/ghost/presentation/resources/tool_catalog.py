@@ -64,3 +64,36 @@ PDF_TOOLS = [
         "icon": "pdf_to_images"
     }
 ]
+
+
+
+IMAGE_TOOLS = [
+    {
+        "id": "compress_image",
+        "title": "Compress Images",
+        "description": "Reduce image file sizes while maintaining visual quality.",
+        "category": "Optimize",
+        "icon": "compress_image"
+    },
+    {
+        "id": "resize_image",
+        "title": "Resize Images",
+        "description": "Adjust image dimensions to suit your needs.",
+        "category": "Edit",
+        "icon": "resize_image"
+    },
+    {
+        "id": "convert_image",
+        "title": "Convert Image Format",
+        "description": "Convert images between supported file formats.",
+        "category": "Convert",
+        "icon": "convert_image"
+    },
+    {
+        "id": "crop_image",
+        "title": "Crop Images",
+        "description": "Remove unwanted areas from your images.",
+        "category": "Edit",
+        "icon": "crop_image"
+    }
+]

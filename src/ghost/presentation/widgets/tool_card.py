@@ -25,7 +25,7 @@ class ToolCard(QFrame):
 
         self.setSizePolicy(
             QSizePolicy.Policy.Preferred,
-            QSizePolicy.Policy.Fixed
+            QSizePolicy.Policy.Preferred
         )
 
         self.setObjectName("toolCard")

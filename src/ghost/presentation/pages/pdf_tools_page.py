@@ -140,6 +140,10 @@ class PDFToolsPage(QWidget):
         # Tool catalogue grid
         self.tools_layout = QGridLayout()
 
+        self.tools_layout.setColumnStretch(0, 1)
+        self.tools_layout.setColumnStretch(1, 1)
+        self.tools_layout.setColumnStretch(2, 1)
+
         self.tools_layout.setHorizontalSpacing(16)
         self.tools_layout.setVerticalSpacing(16)
 

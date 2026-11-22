@@ -18,6 +18,7 @@ from ghost.presentation.resources.styles import dimensions
 
 from ghost.presentation.pages.home_page import HomePage
 from ghost.presentation.pages.pdf_tools_page import PDFToolsPage
+from ghost.presentation.pages.image_tools_page import ImageToolsPage
 
 
 class MainWindow(QMainWindow):
@@ -181,7 +182,7 @@ class MainWindow(QMainWindow):
             )
 
         # Image Tools page
-        self.image_page = QWidget()
+        self.image_page = ImageToolsPage()
         self.page_stack.addWidget(self.image_page)
         image_button.clicked.connect(
             lambda: self.navigate_to(2)
