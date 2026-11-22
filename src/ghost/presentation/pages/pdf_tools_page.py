@@ -80,6 +80,7 @@ class PDFToolsPage(QWidget):
         )
 
         layout.addWidget(description)
+        layout.addSpacing(10)
 
 
         # Category filter buttons
@@ -133,6 +134,7 @@ class PDFToolsPage(QWidget):
         filter_layout.addStretch()
 
         layout.addLayout(filter_layout)
+        layout.addSpacing(7)
 
 
         # Tool catalogue grid
